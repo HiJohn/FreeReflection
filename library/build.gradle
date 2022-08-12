@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 32
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 32
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+                arguments '-DANDROID_STL=c++_static'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+//    externalNativeBuild {
+//        cmake {
+//             path "src/main/cpp/CMakeLists.txt"
+//        }
+//    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    androidTestImplementation 'junit:junit:4.13.2'
+}
+
+//apply plugin: 'com.novoda.bintray-release'
+//
+//publish {
+//    userOrg = 'twsxtd'
+//    groupId = 'me.weishu'
+//    artifactId = 'free_reflection'
+//    publishVersion = '3.1.0'
+//    desc = 'Use Relection above Android P without any restriction'
+//    website = 'https://github.com/tiann/FreeRelfection'
+//}
